@@ -29,7 +29,7 @@ Moreover you can perform the following operations:
 - **make local.build**: recompiles xatu image
 - **make dependencies.upgrade**: upgrade all dependencies
   
-## cli
+## CLI
 
 Xatu has a powrful cli which can help us to perform operations directly in the system. You can get more information
 about the available commands by executting
