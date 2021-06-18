@@ -22,7 +22,7 @@ health_check(){
 
 
 migrate(){
-    python manage.py arango build models;
+    python manage.py arango build;
 }
 
 
