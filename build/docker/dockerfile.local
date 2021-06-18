@@ -1,0 +1,37 @@
+ARG PYTHON_VERSION=3.9
+
+FROM python:${PYTHON_VERSION}-slim
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONASYNCIODEBUG 1
+ENV PYTHONBREAKPOINT ipdb.set_trace
+ENV PYTHONUNBUFFERED 1
+ENV XATU_PORT = 9700
+
+RUN apt-get update \
+    && apt-get install --assume-yes --no-install-recommends \
+    git \
+    bash \
+    netcat-openbsd \
+    && pip install --upgrade pip \
+    && pip install -U setuptools\
+    && pip install poetry \
+    && poetry config virtualenvs.create false \
+    && rm -rf /var/cache/apk/*
+
+COPY ./build/config/.bashrc /root/.bashrc
+COPY ./build/config/start.sh /bin/start.sh
+COPY ./build/config/shell.py /root/.ipython/profile_default/startup/init.py
+RUN chmod +x /bin/start.sh
+
+WORKDIR /app
+COPY ./manage.py manage.py
+COPY ./cli /cli
+COPY ./pyproject.toml pyproject.toml
+COPY ./poetry.lock poetry.lock
+COPY ./xatu /xatu
+RUN poetry install
+
+EXPOSE 9700
+
+ENTRYPOINT ["start.sh"]
+CMD [ "serve:watch" ]

@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  ################################################################################
+  #                                DEPENDENCIES                                  #
+  ################################################################################
+  arango:
+    image: arangodb/arangodb
+    container_name: xatu.arango
+    restart: always
+    environment:
+      - ARANGO_ROOT_PASSWORD=root
+    ports:
+      - "8529:8529"
+    volumes:
+      - xatu.rayquaza:/var/lib/arangodb3
+    networks:
+      - xatu-network
+
+  ################################################################################
+  #                                     XATU                                     #
+  ################################################################################
+  xatu:
+    build:
+      context: .
+      dockerfile: build/docker/dockerfile.local
+    container_name: xatu
+    command: "serve:watch"
+    volumes:
+      - ./xatu:/app/xatu
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./poetry.lock:/app/poetry.lock
+      - ./manage.py:/app/manage.py
+      - ./cli:/app/cli
+    ports:
+      - "9400:9400"
+    env_file:
+      - ./build/env/.env
+    networks:
+      - xatu-network
+
+################################################################################
+#                                   NETWORKS                                   #
+################################################################################
+networks:
+  xatu-network:
+    driver: bridge
+################################################################################
+#                                   VOLUMES                                    #
+################################################################################
+volumes:
+  xatu.rayquaza:
+  data01:
+    driver: local

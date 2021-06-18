@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "xatu"
+version = "0.1.0"
+description = ""
+authors = ["alvarogf97 <ankora45@gmail.com>"]
+license = "Apache2"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.63.0"
+uvicorn = "^0.13.4"
+ipython = "^7.21.0"
+httpx = "^0.17.1"
+pydantic = "^1.8.1"
+email-validator = "^1.1.2"
+python-multipart = "^0.0.5"
+python-dateutil = "^2.8.1"
+pytest-asyncio = "^0.14.0"
+asynctest = "^0.13.0"
+requests = "^2.25.1"
+arango-orm = "^0.6.2"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.5.5"
+coveralls = "^3.0.1"
+pytest-cov = "^2.11.1"
+pytest-httpx = "^0.11.0"
+ipdb = "^0.13.7"
+Faker = "^8.0.0"
+typer = "^0.3.2"
+colorama = "^0.4.4"
+tqdm = "^4.60.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+addopts = "-s"
+
+[tool.coverage.paths]
+source = ["./xatu/", "/app/xatu/"]
+
+[tool.coverage.run]
+omit = ["./xatu/models/factories/*.py", "*tests/*"]
