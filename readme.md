@@ -66,7 +66,7 @@ arango:
     - xatu.rayquaza:/var/lib/arangodb3
 
 xatu:
-  image: ghcr.io/antartical/gandalf
+  image: ghcr.io/antartical/xatu
   container_name: xatu
   ports:
     - "9700:9700"
