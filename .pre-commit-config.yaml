@@ -11,3 +11,4 @@ repos:
             "git+https://github.com/pycqa/pycodestyle@d219c68#egg=pycodestyle",
           ]
         args: [--config=src/setup.cfg]
+        exclude: ^build/config/

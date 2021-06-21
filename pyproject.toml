@@ -43,4 +43,4 @@ addopts = "-s"
 source = ["./xatu/", "/app/xatu/"]
 
 [tool.coverage.run]
-omit = ["./xatu/models/factories/*.py", "*tests/*", "*/__init__.py"]
+omit = ["./xatu/factories/*.py", "*tests/*", "*/__init__.py"]
